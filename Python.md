@@ -1,4 +1,4 @@
-Phython
+Python
 ======
 ##### 설치(Python.org)
 ###### 1. Aanaconda : 대부분 패키지가 포함 (초급) (www.anaconda.com)
