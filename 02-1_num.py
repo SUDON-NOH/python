@@ -121,8 +121,8 @@ print('{0:=^60}'.format('Q.1'))
 
 dist = input("거리 : ")
 vel = input("속도 : ")
-dist_vel = int(dist) / int(vel)
-print(dist_vel)
+time = int(dist) / int(vel)
+print(time)
 
 # Q2
 print('{0:=^60}'.format('Q.2'))
