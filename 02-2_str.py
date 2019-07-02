@@ -216,6 +216,7 @@ c = 'gndrmbsojcktph'
 d = 'aeiou'
 
 transtable = ''.maketrans(a + b, c + d)
+print(type(transtable))         # <class 'dict'>
 result = 'ㄱㅏㄴㅣㅂㅏㅂㅗ'.translate(transtable)
 
 print(result)
