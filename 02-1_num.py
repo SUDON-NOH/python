@@ -8,6 +8,8 @@ CTRL + Shift + F10 : 현재 수행 중인 소스코드를 Run
 Shift + F9         : Debug
 F8                 : Debug Step Over
 Alt + Shift + E    : 한 줄씩 또는 블럭한 것들만 출력
+\n                 : 줄바꾸기
+\t                 : Tab 키 같은 기능
 """
 
 # 02-1_숫자형
