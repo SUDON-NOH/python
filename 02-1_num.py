@@ -250,4 +250,3 @@ print(f, type(f))
 
 g = bool([0])           # True
 print(g, type(g))
-
