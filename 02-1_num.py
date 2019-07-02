@@ -137,5 +137,22 @@ print('{0}={1}'.format('둘레', ROD))
 # Q3
 print('{0:=^60}'.format('Q.3'))
 HWC = input("화씨 : ")
-SC = input("섭씨")
+SC = (int(HWC) - 32) / 1.8
+print(format(int(SC), '4.2f'))
 
+# Q4
+a = input('a = ')
+b = input('b = ')
+sum_1 = int(a) + int(b)
+sub_1 = int(a) - int(b)
+mul_1 = int(a) * int(b)
+dvi_1 = int(a) / int(b)
+mok_1 = int(a) // int(b)
+nah_1 = int(a) % int(b)
+
+print('{0} = {1}'.format('합', sum_1))
+print('{0} = {1}'.format('차', sub_1))
+print('{0} = {1}'.format('곱', mul_1))
+print('{0} = {1}'.format('나누기', dvi_1))
+print('{0} = {1}'.format('몫', mok_1))
+print('{0} = {1}'.format('나머지', nah_1))
