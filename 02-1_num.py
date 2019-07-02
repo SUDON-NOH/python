@@ -216,3 +216,38 @@ print( '{0:^6} - {1:^6} = {2:<6}'.format( number1, number2, subtract ) )
 print( '{0:^6} * {1:^6} = {2:<6}'.format( number1, number2, multiple ) )
 print( '{0:^6} / {1:^6} = {2:<6.2f}'.format( number1, number2, divide ) )
 print( '{0:^6} % {1:^6} = {2:<6.2f}'.format( number1, number2, mod ) )
+
+print("-"*70)
+
+# bool : True는 1 False는 0 정수 값으로 간주된다.
+
+a = 1
+print(a > 0) # True
+print(a < 0) # False
+
+b = a > 0
+print(b)
+print(type(b))
+print(type(a))
+
+c = True
+print(type(c))
+
+C = True + True
+print(c, type(c))
+
+C = True + b            # True
+print(b, type(c))
+
+d = bool(3)             # True
+print(d, type(d))
+
+e = bool(0)             # False
+print(e, type(e))
+
+f = bool([])            # False
+print(f, type(f))
+
+g = bool([0])           # True
+print(g, type(g))
+
