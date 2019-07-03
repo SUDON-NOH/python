@@ -10,6 +10,9 @@ F8                 : Debug Step Over
 Alt + Shift + E    : 한 줄씩 또는 블럭한 것들만 출력
 \n                 : 줄바꾸기
 \t                 : Tab 키 같은 기능
+CTRL + D           : 라인 복사
+CTRL + W           : 라인 전체 선택
+CTRL + F2          : Stop
 """
 
 # 02-1_숫자형
