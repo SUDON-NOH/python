@@ -100,7 +100,7 @@ t = (1, 2, 3, 2, 2, 3)
 print(t.count(2))       # 3, 2 값을 갖는 요소의 개수
 print(t.index(2))       # 1, index
 print(t.index(2,2))     # 3, index
-print(t.index(2,4))     # 4, index
+print(t.index(2,4))     # 4, index 4번째부터 2를 찾는 데 2가 4번째에 있어서 결과 값이 4
 
 
 # tuple 중첩
