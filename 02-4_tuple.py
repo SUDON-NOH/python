@@ -142,3 +142,20 @@ print('{0:=^70}'.format('Q.6'))
 c.remove(c[3])
 print('{0:=^70}'.format('Q.7'))
 c[5] = 'c1'
+
+
+# named tuple : 이름있는 튜플 : 함수의 좌표와 유사
+# 튜플을 숫자 인덱스가 아닌 이름으로 접근 가능하다
+from collections import namedtuple
+point = namedtuple('dot','x, y')     # 이름이 있는 튜플의 class' instance(객체)를 생성
+print(point.__name__)                # 이름을 출력
+pt1 = point(1.0, 5.0)
+pt2 = point(2,3)
+pt3 = point('Hello', 'Good bye')
+print(pt1, pt2, pt3)
+# dot(x=1.0, y=5.0) dot(x=2, y=3) dot(x='Hello', y='Good bye')
+print(type(print))
+number = pt1.x + pt1.y
+print(number, type(number))         # 6.0 <class 'float'>
+string = pt3.x + ' ' + pt3.y
+print(string, type(string))         # Hello Good bye <class 'str'>
