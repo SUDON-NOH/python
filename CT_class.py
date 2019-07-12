@@ -18,3 +18,4 @@ class Calculator():
 if __name__ == '__main__':
     sec = Calculator()
     print(sec.calculate(10, 5, 2))
+    
