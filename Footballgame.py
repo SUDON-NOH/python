@@ -39,7 +39,7 @@ class Football:
     def field_ability(self, list_3):                    # list_3 은 ability에서 선수명과 능력치를 합한 것
         self.speed = {}                                 # self.speed 등으로 불러와서 사용 가능
         self.shot = {}                                  # dict 형태로 구현
-        self.pass_n = {}
+        self.pass_n = {}                                # 필드 플레이어용 능력치 추출기
         self.dribbling = {}
         self.defence = {}
         self.physical = {}
@@ -66,6 +66,37 @@ class Football:
             g = {list_3[x][0] : list_3[x][7]}
             self.ovr.update(g)
         return self.speed, self.shot, self.pass_n, self.dribbling, self.defence, self.physical, self.ovr
+
+    def gk_ability(self, list_3):                    # list_3 은 ability에서 선수명과 능력치를 합한 것
+        self.diving = {}                             # self.speed 등으로 불러와서 사용 가능
+        self.handling = {}                           # dict 형태로 구현
+        self.kick = {}                               # 골키퍼 플레이어용 능력치 추출기
+        self.reaction = {}
+        self.speed_gk = {}
+        self.site_selection = {}
+        self.ovr_gk = {}
+        for x in range(0, len(list_3)):
+            a = {list_3[x][0] : list_3[x][1]}
+            self.diving.update(a)
+        for x in range(0, len(list_3)):
+            b = {list_3[x][0] : list_3[x][2]}
+            self.handling.update(b)
+        for x in range(0, len(list_3)):
+            c = {list_3[x][0] : list_3[x][3]}
+            self.kick.update(c)
+        for x in range(0, len(list_3)):
+            d = {list_3[x][0] : list_3[x][4]}
+            self.reaction.update(d)
+        for x in range(0, len(list_3)):
+            e = {list_3[x][0] : list_3[x][5]}
+            self.speed_gk.update(e)
+        for x in range(0, len(list_3)):
+            f = {list_3[x][0] : list_3[x][6]}
+            self.site_selection.update(f)
+        for x in range(0, len(list_3)):
+            g = {list_3[x][0] : list_3[x][7]}
+            self.ovr_gk.update(g)
+        return self.diving, self.handling, self.kick, self.reaction, self.speed_gk, self.site_selection, self.ovr_gk
 
 
 
@@ -113,4 +144,5 @@ field_a = a.field_ability(ability1)
 print(a.speed)
 print(a.dribbling)
 print(a.shot)
+
 
