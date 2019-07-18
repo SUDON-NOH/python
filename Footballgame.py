@@ -109,40 +109,51 @@ class Football:
 
 member_0 = open('C:/Users/CPB06GameN/PycharmProjects/Python/member.csv', 'r', encoding='UTF-8')
 field_member = member_0.readlines()
-print(field_member)
+
+# # 원본 데이터 - 필드 플레이어용
+print('원본 데이터','\n', field_member)
 
 member_1 = open('C:/Users/CPB06GameN/PycharmProjects/Python/member2.csv', 'r', encoding='UTF-8')
 GK_member = member_1.readlines()
-print(GK_member)
+
+# # 원본 데이터 - 골키퍼 플레이어용
+print('원본 데이터','\n', GK_member)
 
 
 a = Football()
 x = a.members(field_member)
 y = a.members(GK_member)
 
-print(a.extraction_name(x))
+# # 선수 이름 추출
 name1 = a.extraction_name(x)
-print(name1)
-print(a.extraction_name(y))
+print('플드 플레이어 선수 이름','\n', name1)
 name2 = a.extraction_name(y)
-print(len(x))
-print(len(y))
-print(a.extraction_stats(x))
-print(a.extraction_stats(y))
-print(a.change_int(a.extraction_stats(x)))
-stats1 = a.change_int(a.extraction_stats(x))
-print(a.change_int(a.extraction_stats(y)))
-stats2 = a.change_int(a.extraction_stats(y))
+print('골키퍼 플레이어 선수 이름','\n',name2)
 
+# # 선수 능력치 추출
+ext1 = a.extraction_stats(x)
+print('필드 플레이어 능력치 추출','\n', ext1)
+ext2 = a.extraction_stats(y)
+print('골키퍼 플레이어 능력치 추출','\n', ext2)
+
+# # 선수 능력치 int형으로 변환
+stats1 = a.change_int(ext1)
+print('필드 플레이어 능력치 추출(int형)','\n',stats1)
+stats2 = a.change_int(ext2)
+print('골키퍼 플레이어 능력치 추출(int형)','\n', stats2)
+
+# # 이름 + 능력치
 ability1 = a.ability(name1, stats1)
 ability2 = a.ability(name2, stats2)
-print(ability1)
-print(ability2)
+print('필드 플레이어 이름 + 능력치','\n', ability1)
+print('골키퍼 플레이어 이름 + 능력치','\n', ability2)
 
 field_a = a.field_ability(ability1)
 
-print(a.speed)
-print(a.dribbling)
-print(a.shot)
+# # 각 플레이어별 능력치
+print('필드 플레이어 스피드','\n',a.speed)
+print('필드 플레이어 드리블','\n',a.dribbling)
+print('필드 플레이어 슛팅','\n',a.shot)
+print('메시의 스피드','\n',a.speed['L.Messi'])
 
 
