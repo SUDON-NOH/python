@@ -622,17 +622,17 @@ class jamjam:
 
     def jamjam2(self):
         player_num = self.jam.jamname2
-        print('player_num', player_num)
+        # print('player_num', player_num)
         player =self.jam.j_5     # field_member
-        print(player)
+        # print(player)
         player_name = self.jam.j_1.extraction_name2(player)  # name
-        print('player_name',player_name)
+        # print('player_name',player_name)
         player_stats = self.jam.j_1.extraction_stats(player)
-        print('player_stats',player_stats)
+        # print('player_stats',player_stats)
         # print('here!!!!!!!',self.jam.change_int(player_stats))
         player_non_str = self.jam.j_1.ability(player_name, self.jam.j_1.change_int(player_stats))
-        print('self.jam.j_1.change_int(player_stats)',self.jam.j_1.change_int(player_stats))
-        print('player_non_str',player_non_str)
+        # print('self.jam.j_1.change_int(player_stats)',self.jam.j_1.change_int(player_stats))
+        # print('player_non_str',player_non_str)
 
         self.player_dic = {}
         posit_list = ['CF', 'CM', 'CB', 'WB', 'GK']
