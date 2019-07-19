@@ -34,6 +34,14 @@ class Prepare_F:
             self.name_list.append(list_1[x][0])
         return self.name_list
 
+
+    def extraction_name2(self, list_1):                      # 여기서 list는 위에 members 함수로 뽑아낸 리스트를
+        self.name_list = []                                 # 활용해서 각 리스트 인덱스 0번에 위치한 선수들의 이름을
+        for x in range(0, len(list_1)):                     # 추출하는 함수
+            self.name_list.append(list_1[x][0:2])
+        return self.name_list
+
+
     def extraction_npo(self, list_1):
         self.npo_list = []
         a = []
@@ -303,6 +311,10 @@ class Prepare_M:
         self.npo2 = self.j_1.extraction_npo(j_3)
         print('필드 플레이어 이름, 포지션, OVR', '\n', self.npo2)
 
+        self.tt = self.j_1.numbering_fd(self.name1)
+        self.jamname = self.j_1.extraction_name2(j_2)
+        self.jamname2 = self.j_1.numbering_fd(self.jamname)
+
         # # 선수 능력치 추출
         self.ext1 = self.j_1.extraction_stats(j_2)
         print('필드 플레이어 능력치 추출', '\n', self.ext1)
@@ -467,8 +479,7 @@ class jamjam:
     def __init__(self):
         self.jam = Prepare_M()
 
-    def select_player(lists, select,
-                      player_dic):
+    def select_player(self, lists, select,player_dic):
         # list : 선수 1명의 능력치 list  : ['son',10,20,40,80,20,50,90] # 90자리 ,ovr    [7]
         # cf = [] # 공격수 :[['son',10,20,40,80,20,50],['jam',10,20,40,80,20,50],['yum',10,20,40,80,20,50]]
         # cm = [] # 미드필더 : 형식 동일
@@ -481,10 +492,10 @@ class jamjam:
             if select == lists[1]:
                 player_dic['CF'].append(lists)
             elif select == 'CM':  # CM선택
-                lists[-1] = lists[-1] - (lists[-1] * 0.3)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.3)
                 player_dic['CM'].append(lists)
             elif select == 'CB':  # CB면
-                print('finish')
+                # print('finish')
                 # lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
                 # lists[-1] = int(lists[-1]) -(int(lists[-1])*0.5)
 
@@ -495,7 +506,7 @@ class jamjam:
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
                 player_dic['WB'].append(lists)
             elif select == 'GK':
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['GK'].append(lists)
             else:
                 print('error1')
@@ -505,7 +516,7 @@ class jamjam:
             if select == lists[1]:
                 player_dic['CM'].append(lists)
             elif select == 'CF':  # CM선택
-                lists[-1] = lists[-1] - (lists[-1] * 0.3)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.3)
                 player_dic['CF'].append(lists)
             elif select == 'CB':  # CB면
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
@@ -514,7 +525,7 @@ class jamjam:
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
                 player_dic['WB'].append(lists)
             elif select == 'GK':
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['GK'].append(lists)
             else:
                 print('error2')
@@ -524,7 +535,7 @@ class jamjam:
             if select == lists[1]:
                 player_dic['CB'].append(lists)
             elif select == 'CM':  # CM선택
-                lists[-1] = lists[-1] - (lists[-1] * 0.3)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.3)
                 player_dic['CM'].append(lists)
             elif select == 'CF':  # CB면
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
@@ -533,7 +544,7 @@ class jamjam:
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
                 player_dic['WB'].append(lists)
             elif select == 'GK':
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['GK'].append(lists)
             else:
                 print('error3')
@@ -543,7 +554,7 @@ class jamjam:
             if select == lists[1]:
                 player_dic['WB'].append(lists)
             elif select == 'CM':  # CM선택
-                lists[-1] = lists[-1] - (lists[-1] * 0.3)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.3)
                 player_dic['CM'].append(lists)
             elif select == 'CB':  # CB면
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
@@ -552,7 +563,7 @@ class jamjam:
                 lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.5)
                 player_dic['CF'].append(lists)
             elif select == 'GK':
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['GK'].append(lists)
             else:
                 print('error')
@@ -561,16 +572,16 @@ class jamjam:
             if select == lists[1]:
                 player_dic['GK'].append(lists)
             elif select == 'CM':  # CM선택
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['CM'].append(lists)
             elif select == 'CB':  # CB면
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['CB'].append(lists)
             elif select == 'WB':
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['CF'].append(lists)
             elif select == 'CF':
-                lists[-1] = lists[-1] - (lists[-1] * 0.9)
+                lists[-1] = int(lists[-1]) - (int(lists[-1]) * 0.9)
                 player_dic['CF'].append(lists)
             else:
                 print('error')
@@ -585,44 +596,48 @@ class jamjam:
 
 
     def jimmy_print_position(self):
-            for i in self.jam.xx_n['CF']:
+            for i in self.player_dic['CF']:
                 print('{0:=^20}'.format(i[0]), end='')
+            print()
 
             # print('{0:=^120}'.format('0'))
 
-            for o in self.jam.xx_n['CM']:
+            for o in self.player_dic['CM']:
                 print('{0:=^20}'.format(o[0]), end='')
             print()
 
 
-            for wb in range(len(self.jam.xx_n['WB'])):
+            for wb in range(len(self.player_dic['WB'])):
                 if wb == 0:
-                    print('{0:=^15}'.format(self.jam.xx_n['WB'][wb][0]), end='')
-                    for cb in self.jam.xx_n['CB']:
+                    print('{0:=^15}'.format(self.player_dic['WB'][wb][0]), end='')
+                    for cb in self.player_dic['CB']:
                         print('{0:=^15}'.format(cb[0]), end='')
                 else:
-                    print('{0:=^15}'.format(self.jam.xx_n['WB'][wb][0]), end='')
+                    print('{0:=^15}'.format(self.player_dic['WB'][wb][0]), end='')
+            print()
 
-            for p in self.jam.xx_n['GK']:
+            for p in self.player_dic['GK']:
                 print('{0:=^60}'.format(p[0]))
 
 
     def jamjam2(self):
-
+        player_num = self.jam.jamname2
+        print('player_num', player_num)
         player =self.jam.j_5     # field_member
         print(player)
-        player_name = self.jam.j_1.extraction_name(player)  # name
-        # print(player_name)
+        player_name = self.jam.j_1.extraction_name2(player)  # name
+        print('player_name',player_name)
         player_stats = self.jam.j_1.extraction_stats(player)
-
+        print('player_stats',player_stats)
         # print('here!!!!!!!',self.jam.change_int(player_stats))
         player_non_str = self.jam.j_1.ability(player_name, self.jam.j_1.change_int(player_stats))
-        # print(player_non_str)
+        print('self.jam.j_1.change_int(player_stats)',self.jam.j_1.change_int(player_stats))
+        print('player_non_str',player_non_str)
 
-        player_dic = {}
+        self.player_dic = {}
         posit_list = ['CF', 'CM', 'CB', 'WB', 'GK']
         for posit in posit_list:  # 포지션마다 딕셔너리 선언
-            player_dic[posit] = []
+            self.player_dic[posit] = []
 
         while True:
             # message()
@@ -641,19 +656,19 @@ class jamjam:
             # print(result)
             # print('HERE>>>>>>>>>>',player_non_str)
             print(position)
-            print('-2')
             for name in player_non_str:
                 # print('player_num[player][0]:',player_num[player][0])
-                # print('name',name[0])
-                print('-1')
-                print('self.jam.xx_n[player][0]', self.jam.xx_n[player][0])
-                print('name',name[0])
-                if name[0] == self.jam.xx_n[player][0]:
-                    print('0')
-                    player_dic = self.select_player(name, position, player_dic)
-                    print('1')
-                    print(player_dic)
+                # print('name',print(),name[0])
+                # print('player_num',player_num[player][0])
+                if name[0][0] == player_num[player][0]:
+                    # print('0')
+                    # print('HERE!!!!!!!!!!!!!!!!!!!!!!!',name, position, self.player_dic)
+                    self.player_dic = self.select_player(name[0], position, self.player_dic)
+                    # print('1')
+                    # print(self.player_dic)
                     self.jimmy_print_position()
+                    # asd = input('x')
                 else:
+                    # print('pass')
                     pass
 
