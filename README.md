@@ -22,3 +22,18 @@ open('folder/output.txt','w') 하위폴더를 지정할려면, 폴더 이름을 
 numpy # 다차원을 1차원으로 변경
 
 a.ravel()
+
+=======================================================================================
+
+파이참 설치시
+
+Consider using the `--user` option or check the permissions.
+
+에러
+
+pip install --user --upgrade setuptools
+
+or
+
+pip install --user setuptools
+
