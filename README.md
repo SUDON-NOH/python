@@ -37,3 +37,5 @@ or
 
 pip install --user setuptools
 
+
+easy_install -U pip
