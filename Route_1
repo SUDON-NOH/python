@@ -1,0 +1,196 @@
+# Route 1 은 개인 REGI 에서 팀 REGI 로 이동하도록 하는 프로그램
+
+import sys
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtCore import QSettings
+
+class Myapp(QWidget):
+
+    def __init__(self):
+        super().__init__()
+
+        self.settings = QSettings('QtApp', 'App1')
+        self.SAVEUI()
+
+    def SAVEUI(self):
+
+        self.lb1 = QLabel("From")
+        self.lb2 = QLabel("To")
+        self.search_btn1 = QPushButton("찾기")
+        self.search_btn2 = QPushButton("찾기")
+        self.save_btn = QPushButton("SAVE")
+        try:
+            self.file_load1 = QLineEdit(self.settings.value('from_load'))
+            self.file_load2 = QLineEdit(self.settings.value('to_load'))
+        except:
+            self.file_load1 = QLineEdit()
+            self.file_load2 = QLineEdit()
+
+        self.lb1.setFixedSize(30, 40)
+        self.lb2.setFixedSize(30, 40)
+        self.save_btn.setFixedSize(70, 30)
+
+        Hbox1 = QHBoxLayout()
+        Hbox2 = QHBoxLayout()
+        Vbox = QVBoxLayout()
+
+        Hbox1.addWidget(self.lb1)
+        Hbox1.addWidget(self.file_load1)
+        Hbox1.addWidget(self.search_btn1)
+
+        Hbox2.addWidget(self.lb2)
+        Hbox2.addWidget(self.file_load2)
+        Hbox2.addWidget(self.search_btn2)
+
+        Vbox.addLayout(Hbox1)
+        Vbox.addLayout(Hbox2)
+        Vbox.addWidget(self.save_btn, alignment=Qt.AlignHCenter)
+
+        self.search_btn1.clicked.connect(self.openfile1)
+        self.search_btn2.clicked.connect(self.openfile2)
+        self.save_btn.clicked.connect(self.save)
+
+        self.setLayout(Vbox)
+
+        self.setWindowTitle('REGI SAVE')
+        self.setWindowIcon(QIcon('Ybio.png'))
+        self.resize(400, 150)
+        self.show()
+
+    def openfile1(self):
+        filename = QFileDialog.getOpenFileName()
+        self.file_load1.setText(filename[0])
+
+    def openfile2(self):
+        filename = QFileDialog.getOpenFileName()
+        self.file_load2.setText(filename[0])
+
+    def save(self):
+        file1 = self.file_load1.text()
+        file2 = self.file_load2.text()
+
+        self.settings.setValue('from_load', self.file_load1.text())
+        self.settings.setValue('to_load', self.file_load2.text())
+
+
+if __name__ == "__main__":
+
+    app = QApplication(sys.argv)
+    ex = Myapp()
+    sys.exit(app.exec_())
+
+
+# ------UPDATE-------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Route 1 은 개인 REGI 에서 팀 REGI 로 이동하도록 하는 프로그램
+
+import sys
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtCore import QSettings
+from Excel_add import Excel_control as EC
+from PyQt5.QtWidgets import QProgressBar
+
+
+class Myapp(QWidget):
+
+    def __init__(self):
+        super().__init__()
+
+        self.settings = QSettings('QtApp', 'App1')
+
+        self.SAVEUI()
+
+    def SAVEUI(self):
+
+        self.lb1 = QLabel("From")
+        self.lb2 = QLabel("To")
+        self.search_btn1 = QPushButton("찾기")
+        self.search_btn2 = QPushButton("찾기")
+        self.save_btn = QPushButton("SAVE")
+        self.pbar = QProgressBar()
+
+
+        # call setting values
+        try:
+            self.file_load1 = QLineEdit(self.settings.value('from_load'))
+            self.file_load2 = QLineEdit(self.settings.value('to_load'))
+        except:
+            self.file_load1 = QLineEdit()
+            self.file_load2 = QLineEdit()
+
+        # fixed size of items
+        self.lb1.setFixedSize(30, 40)
+        self.lb2.setFixedSize(30, 40)
+        self.save_btn.setFixedSize(70, 30)
+        self.pbar.setFixedSize(200, 5)
+
+        # layout
+        Hbox1 = QHBoxLayout()
+        Hbox2 = QHBoxLayout()
+        Vbox = QVBoxLayout()
+
+        Hbox1.addWidget(self.lb1)
+        Hbox1.addWidget(self.file_load1)
+        Hbox1.addWidget(self.search_btn1)
+
+        Hbox2.addWidget(self.lb2)
+        Hbox2.addWidget(self.file_load2)
+        Hbox2.addWidget(self.search_btn2)
+
+        Vbox.addLayout(Hbox1)
+        Vbox.addLayout(Hbox2)
+        Vbox.addWidget(self.pbar, alignment=Qt.AlignHCenter)
+        Vbox.addWidget(self.save_btn, alignment=Qt.AlignHCenter)
+
+        # actions
+        self.search_btn1.clicked.connect(self.openfile1)
+        self.search_btn2.clicked.connect(self.openfile2)
+        self.save_btn.clicked.connect(self.save)
+
+        self.setLayout(Vbox)
+
+        self.setWindowTitle('REGI SAVE')
+        self.setWindowIcon(QIcon('Ybio.png'))
+        self.resize(400, 200)
+        self.show()
+
+    def openfile1(self):
+        filename = QFileDialog.getOpenFileName()
+        self.file_load1.setText(filename[0])
+
+    def openfile2(self):
+        filename = QFileDialog.getOpenFileName()
+        self.file_load2.setText(filename[0])
+
+    def save(self):
+
+        file1 = self.file_load1.text()
+        file2 = self.file_load2.text()
+
+        EC.file_load(self, file1, file2)
+
+        self.settings.setValue('from_load', self.file_load1.text())
+        self.settings.setValue('to_load', self.file_load2.text())
+
+
+if __name__ == "__main__":
+
+    app = QApplication(sys.argv)
+    ex = Myapp()
+    sys.exit(app.exec_())

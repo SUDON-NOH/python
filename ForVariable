@@ -1,0 +1,27 @@
+# The First WAY
+X = ['A', 'B', 'C']
+
+for i in X:
+  
+  globals()[i] = 1
+  
+"""
+a = 1
+b = 1
+c = 1
+"""
+
+# The Second WAY
+
+for i in range(10):
+
+  globals()['sss{}'.format(i)]=2
+  
+"""
+sss1 = 2
+sss2 = 2
+sss3 = 2
+.
+.
+.
+"""

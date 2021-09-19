@@ -1,0 +1,64 @@
+from Bio import SeqIO
+from collections import efaultdict
+import matplotlib.pyplot as plt
+
+# --------------------------------------------- parse ---------------------------------------------
+# Make the handler for ab1
+handle = open("ADDRESS.ab1", "rb")
+
+# parsing
+for record in SeqIO.parse(handle, "abi"):
+
+  print(record)       # print information of the file
+  print(record.seq)   # print sequence
+  print(record.id)    # print id of the file
+  
+seq_string = str(record.seq)
+seq_list = listt(record.seq)
+
+# --------------------------------------------- read ---------------------------------------------
+
+record = SeqIO.read("ADDRESS.ab1", "abi")
+
+# 앞 뒤의 값을 빼서 양수, 음수 구분과 동시에 양수인 부분이 같은 움직임을 보이면 그 부분은 노이즈라고 판단
+A = list(record.adnnotations["abif_raw"]["DATA9])[1000:10900]
+B = list(record.adnnotations["abif_raw"]["DATA10])[1000:10900]
+C = list(record.adnnotations["abif_raw"]["DATA11])[1000:10900]
+D = list(record.adnnotations["abif_raw"]["DATA12])[1000:10900]
+
+length = len(A) # length of x-axis
+count = 0
+
+ali = []
+bli = []
+cli = []
+dli = []
+
+for num in range(length):
+
+    if num == 0:
+        pass
+    else:
+        a = A[num] - A[num-1] # height of y
+        b = B[num] - B[num-1]
+        c = C[num] - C[num-1]
+        d = D[num] - D[num-1]
+
+        print(num, "  a:  %d, b:  %d, c:  %d, d:  %d" % (a, b, c, d))
+
+
+# --------------------------------------------- graph ---------------------------------------------
+
+list(record.annotations.keys())
+list(record.annotations["abif_raw"].keys())
+
+ch = ["DATA9", "DATA10", "DATA11", "DATA12"]
+trace = defaultdict(list)
+
+for c in ch:
+    trace[c] = record.annotations["abif_raw"][c]
+
+plt.plot(trace["DATA9"], color="blue")
+plt.plot(trace["DATA10"], color="red")
+plt.plot(trace["DATA11"], color="green")
+plt.plot(trace["DATA12"], color="yellow")

@@ -1,0 +1,122 @@
+import time
+import pandas as pd
+import openpyxl
+from datetime import datetime
+
+class Excel_control:
+
+    def file_load(self, from_load, to_load):
+
+
+        self.load1 = from_load
+        self.load2 = to_load
+
+        # FA FT FS FR FD 순으로 COLUMNS 정리
+        self.COLUMNS = \
+            [
+
+                ['UID', 'ID', 'PDATE', 'DATE', 'COLLABO TYPE', 'RESEARCHER', 'HELPER', 'HELPER RATIO', 'PROJECT ID',
+                 'PROJECT', 'TARGET', 'RID', 'TITLE', 'DETAIL', 'PURPOSE', 'EQID', 'KITID', 'EQNAME', 'KITNAME', 'NSUB',
+                 'SAMPLE NUM', 'EVEMT', 'REPEAT'],
+
+                ['UID', 'ID', 'ARID', 'RID', 'RESEARHER', 'START', 'LAST', 'TIME'],
+
+                ['ID', 'MATERIAL', 'COMPOUND'],
+
+                ['ID', 'RID', 'NOQ', 'RESULT', 'DISCUSSION'],
+
+                ['DR', 'RESEARCHER', 'DATE', 'TIME', 'GID', 'TITLE', 'ARID', 'PROJECT', 'EXPID']
+
+            ]
+
+        # SHEET 이름 정리
+
+        self.SHEET = ['FA', 'FT', 'FS', 'FR', 'FD']
+
+        # SHEET 의 열의 길이, DATAFRAME 을 자르는데 사용
+
+        self.column_len = [26, 11, 6, 8, 12]
+
+        # Excel의 CELL 위치
+
+        self.alpha = ['D', 'E', 'F', 'G', 'H',
+                      'I', 'J', 'K', 'L', 'M',
+                      'N', 'O', 'P', 'Q', 'R',
+                      'S', 'T', 'U', 'V', 'W',
+                      'X', 'Y', 'Z']
+
+        for sheet, col, col_len in zip(self.SHEET, self.COLUMNS, self.column_len):
+
+         # 1. 내용을 받을 파일과 보낼파일을 데이터프레임으로 불러오기
+            self.to_content = pd.read_excel(self.load2, sheet_name = sheet)
+
+            self.from_content = pd.read_excel(self.load1, sheet_name = sheet)
+
+         # 2. 데이터 프레임을 가공
+          # 1) 공백인 행 부분을 삭제
+            self.to_content = self.to_content.drop(self.to_content.index[0:6])
+            self.from_content = self.from_content.drop(self.from_content.index[0:6])
+
+          # 2) 사용하는 열 부분만 자르기
+            self.to_content = self.to_content[self.to_content.columns[3:col_len]]
+            self.from_content = self.from_content[self.from_content.columns[3:col_len]]
+
+          # 3) 각 데이터 프레임에 column 넣기
+            self.to_content.columns = col
+            self.from_content.columns = col
+
+          # 4) 보낼 파일 내용의 NaN 값을 제거, 모든 행의 값이 NaN인 경우에는 행을 삭제
+            self.from_content.dropna(how='all')
+
+          # 5) 중복해서 올라가는 것을 방지하기 위한 장치
+           # 첫번째 열의 값을 리스트로 받고, 그 값을 활용해서 중복값 제거
+            self.to_content_value = self.to_content[col[0]].values.tolist()
+            self.final_content = self.from_content[~self.from_content[col[0]].isin(self.to_content_value)]
+
+        # 3. 데이터프레임 옮기기
+            # 1) self.final_content 가 비어있는 프레임이면 text를 출력
+            if self.final_content.empty:
+
+                self.empty_text = "업데이트 될 항목이 없습니다."
+                print(self.empty_text)
+                pass
+
+            else:
+
+            # 2) final_content 의 값들을 리스트로 저장
+                self.content = self.final_content.values.tolist()
+                print(self.content)
+            # 3) 내용을 저장할 위치를 설정하기 위한 cell 주소
+                self.COL = self.alpha[0:col_len-3]
+                print(self.COL)
+            # 4) 받는 파일의 마지막 행의 다음 행 구하기
+                self.ROW = str(len(self.to_content)+8)
+            # 4. 저장할 파일 열고 실행
+                wb = openpyxl.load_workbook(self.load2)
+                w_sheet = wb[sheet]
+                for k in self.content:
+                    for m, i in zip(self.COL, k):
+                        z = m + self.ROW
+                        w_sheet[z] = i
+                        print(z,i)
+                        if m == self.COL[-1]:
+                            DT = datetime.today().strftime("%Y-%m-%d")
+                            if sheet == "FA":
+                                w_sheet["AA" + self.ROW] = DT
+                            elif sheet == "FT":
+                                w_sheet["L" + self.ROW] = DT
+                            elif sheet == "FS":
+                                w_sheet["G" + self.ROW] = DT
+                            elif sheet == "FR":
+                                w_sheet["I" + self.ROW] = DT
+                            else:
+                                w_sheet["M" + self.ROW] = DT
+
+                            self.ROW = int(self.ROW)
+                            self.ROW += 1
+                            self.ROW = str(self.ROW)
+
+
+                wb.save(self.load2)
+
+

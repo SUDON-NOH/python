@@ -1,0 +1,223 @@
+# 
+"""
+문자열 자료형
+"""
+
+a = "Python is Great!"
+print(a)
+
+b = "Life is Short, You need Python"
+print(b)
+
+c = "He said 'I love you'"
+print(c)
+
+
+# 백슬래시를 사용하면 큰 따움표와 작은 따움표를 문자열에 포함시킬 수 있다.
+food = 'Python\'s favorite food is perl'
+say = '\"Python is very easy.\" he says.'
+print(food)
+print(say)
+
+
+# 큰 따움표와 작은 따움표를 구분해서 써야한다.
+# 한 문장에 같은 따움표가 두 번 들어가면 오류
+f = """
+Hello
+Python
+"""
+print(f)
+
+
+# 문자열의 Indexing 과 Slicing
+a = 'Life is too short, you need Python'
+print(a[0], a[1], a[2], a[3], a[8], a[True], a[False]) # Ture = 1 , False = 0
+
+a[0] = 'l' # 불변형(immutable) 자료형이므로 요소 수정 불가
+# TypeError: 'str' object does not support item assignment
+
+a = 'Life is too short, you need Python'
+print(a[-1],a[-2],a[-3],a[-4],a[-11])
+
+# 슬라이싱 : a[시작오프셋:끝옵셋+1]
+print(a[0]+a[1]+a[2]+a[3])
+print(a[0:4])
+
+print(a[12:17])     # "short"
+print(a[:])
+print(a[-6:])           # "Python"
+print(a[-6:-1])         # "Pytho"
+print(a[-11:-7])        # "need"
+
+# print(a[시작옵셋:(끝옵셋 +1):간격(step)])
+
+print(a[0:30:3])        # 3칸씩 건너 뛰면서 인덱스를 선택
+                        # ex) 0, 3, 6, 9, 12, 15, 18, 21 ...
+print(a[::2])
+print(a[::-1])          # 순서를 반대로 출력
+
+a = "20010330Rainy"
+date = a[:8]
+weather = a[8:]
+print(date)
+print(weather)
+
+year = a[:4]
+date = a[4:8]
+weather = a[8:]
+
+print(year, '/' , date)
+
+
+a = 'pithon'
+#a[1] = 'y' 오류
+
+b = a[:1] + 'y' + a[2:]     # 불변형 자료형을 수정하는 방법
+print(b)                    # indexing 과 slicing
+
+# 문자열 연산 : < class 'str'> 의 method(함수)
+s1 = 'first'
+s2 = 'second'
+s3 = s1 + s2            # 이 상황에서는 string class의
+print(s3)               # add method 를 활용해서 계산한 것
+
+
+print(len(s3))          # 문자열의 byte 사이즈
+
+
+# String Class 의 Method
+a = 'i like programming. i like swimming'
+print(type(a))     # <class 'str'>
+
+# upper, lower, title로 대소문자 변환
+print(a.upper())  # 대문자로 변환 string class의 upper method
+print(a)          # ( 숫자의 경우 int class의 ~)
+                  # a. 의 .(포인트)는 범위를 잡는다.
+                  # ex) 대전.한남대학교.사회과학대학교.정치학과.11학번...
+b = a.upper()
+print(b)          # 원본은 그대로 유지 : upper를 쓰고 난 후에도 a는 변화가 없음
+                  # (이유는 string이 불변형 자료형이기 떄문이다)
+b = a.upper()
+print(b)
+c = b.lower()       # 소문자로 변환
+print(c)
+d = c.title()       # 단어의 첫글자만 대문자로 변형
+print(d)
+
+# count, find, rfind, index, startswith
+num = a.count('like')
+print(num)                    # 글자가 사용된 횟수
+
+num_2= a.find('like')         # 단어가 위치한 index를 찾는다. 문자의 위치
+print(num_2)
+
+num_3 = a.find('hello')       # 없으면 -1 반환
+print(num_3)
+
+num_4 = a.find('like', 3)     # 검색 시작위치를 3으로 지정
+print(num_4)   # 22
+
+num_5 = a.rfind('like')       # 역순으로 출력
+print(num_5)
+
+num_6 = a.index('like')       # 인덱스의 위치를 알려준다.
+print(num_6)
+
+b = a.startswith('i like')    # i like로 시작하는 문자열인가?
+                              # (맞으면 True, 틀리면 fales)
+print(b)
+
+# strip : 공백을 제거
+a = ' spam and ham '
+s = a.strip()                # strip 좌우 공백을 제거
+print(s)
+
+a = '+spam and ham+'         # 좌우의 +을 제거
+s = a.strip('+')
+print(s)
+
+s = a.lstrip()               # 왼쪽 공백을 제거
+print(s)
+
+s = a.rstrip()               # 오른쪽 공백을 제거
+print(s)
+
+# split : 문자열을 분리하고 리스트로 반환
+a = ' spam and ham '
+s1 = a.split()               # 공백을 기준으로 문자열을 분리하고 리스트로 반환
+print(s)
+
+s = a.split('and')           # and 를 기준으로 분리
+print(s)
+
+# Join : 글자 혹은 문자 사이에 넣고 싶은 문자 넣기
+s2 = ':'.join(s1)
+print(s2)                   # spam:and:ham
+
+a = 'abcdefg'
+s2 = ':'.join(a)
+print(s2)                   # a:b:c:d:e:f:g
+
+# replace
+a = 'Life is too short'
+b = a.replace('Life', 'Your leg')
+print(b)                            # Your leg is too short
+
+# eval() : 문자열로 표현된 식(expression)을 파이썬 인터프리터가
+#          번역하여 실행시킨다.
+
+a = 10
+b = 20
+c = eval('a + b')
+print(c)
+
+# byte : 0 ~ 255(0xFF)
+a = b"Python rules"         # <class 'byte'>
+print(a, type(a))           # b'Python rules'
+s = a.decode('utf-8')       # <class 'str'>
+print(s, type(s))           # Python rules
+b2 = s.encode('utf-8')      # <class 'byte'>
+print(b2, type(b2))         # b'Python rules'
+
+
+print('{0:=^70}'.format('실습과제'))
+print('{0:=^70}'.format('Q.1'))
+
+s = 'hong gil dong201912121623210'
+print('Name :', s[:13])
+print('Birthday :', s[13:21])
+print('ID Number :', s[13:21], '-', s[21:])
+
+# teacher's code
+name = s[ : s.rfind('g') + 1]
+birthday_index = s.rfind('g') +1
+birthday = s[birthday_index : birthday_index + 9]
+idnumber = s[ s.rfind('g') + 1 :]
+
+print('{0:=^70}'.format('Q.2'))
+
+s = 'PythonProgramming'
+print(s[6:] + s[:6])
+
+print('{0:=^70}'.format('Q.3'))
+
+s = 'hello world'
+print(s[0] + 'i' + ' ' + s[6:])
+print(s.replace('hello', 'hi'))
+
+
+# maketrans()/translate() 함수:
+# 문자열을 mapping 하여 변환한 결과를 얻을 수 있다.
+
+a = 'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ'
+b = 'ㅏㅔㅣㅗㅜ'
+c = 'gndrmbsojcktph'
+d = 'aeiou'
+
+transtable = ''.maketrans(a + b, c + d)
+print(type(transtable))         # <class 'dict'>
+result = 'ㄱㅏㄴㅣㅂㅏㅂㅗ'.translate(transtable)
+
+print(result)
+
+print(len(a),len(b))

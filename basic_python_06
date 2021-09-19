@@ -1,0 +1,129 @@
+# {key:value, ...}
+# key로 value의 값을 가져온다. key는 데이터가 아니다.
+# key 중복을 허용하지 않는다.
+# Value 중복을 허용한다.
+# 연관형, mutable(요소 추가 변경이 가능)
+# sequence(순서형)
+a = {'name':'홍길동','age':30,'phone':'010-1234-1234',
+     'birth':'20021020', 10:100}
+print(a, type(a))   # <class 'dict'>
+
+# 요소 접근 : a[key]
+print(a['name'], a['age'],a[10]) #홍길동 30 100
+
+# 요소 변경, 추가, 삭제
+## 요소 변경
+a['name'] = '김철수'
+a['age'] = 20
+a[10] = 500
+print(a)
+## 요소 추가
+
+# a[(1, 2, 3)] = 10
+print(a)            # key로 tuple은 가능
+
+# a[[1, 2, 3]] = 10
+print(a)            # key로 List는 오류
+# TypeError: unhashable type: 'list'
+
+a['address'] = '대전시'
+a['직업'] = '대학생'
+a[1] = 1
+print(a)
+
+del a['address']    # del a -> 모두 삭제
+del a['직업']
+del a[1]
+print(a)
+
+# 연산자
+print(len(a))           # 5
+print('birth' in a)     # True
+print(a.keys())         # key만을 list로 반환
+                        # #dict_keys(['name', 'age', 'phone', 'birth', 10])
+print(list(a.keys()))   # ['name', 'age', 'phone', 'birth', 10]
+print(a.values())       # Value만 dict_keys 타입으로 반환
+print(list(a.values())) # ['김철수', 20, '010-1234-1234', '20021020', 500]
+
+list_key = list(a.keys())
+list_val = list(a.values())
+
+print(a.items())
+# dict_items([('name', '김철수'), ('age', 20),
+# ('phone', '010-1234-1234'), ('birth', '20021020'), (10, 500)])
+
+print(list(a.items()))
+# [('name', '김철수'), ('age', 20), ('phone', '010-1234-1234'),
+# ('birth', '20021020'), (10, 500)]
+
+print(a['name'])            # 김철수
+print(a.get('name'))        # 김철수
+# print(a['hobby'])         # KeyError: 'hobby'
+print(a.get('hobby'))       # None  함수를 썼을 때는 None 으로 오류가 아닌
+                            # 객체가 없음을 나타내준다. None은 객체
+print(a.get('hobby','독서')) # key와 객체가 없는 경우, 기본 값으로 '독서'를 넣는다.
+
+# {'name': '김철수', 'age': 20, 'phone': '010-1234-1234',
+#  'birth': '20021020', 10: 500}
+
+d = {'gender':'남성','ten':10}
+a.update(d)                 # 요소를 추가
+print(a)
+# {'name': '김철수', 'age': 20, 'phone': '010-1234-1234',
+#  'birth': '20021020', 10: 500, 'gender': '남성', 'ten': 10}
+
+e = {'name':'박철수'}
+a.update(e)
+print(a)
+# {'name': '박철수', 'age': 20, 'phone': '010-1234-1234',
+#  'birth': '20021020', 10: 500, 'gender': '남성', 'ten': 10}
+
+# dict comprehension (사전 내장)
+a = {k:1 for k in 'abcdefg'}
+print(a, type(a))
+
+b = ['name', 'age', 'phone', 'birth', 10]
+a = {k:'0' for k in b}
+print(a,type(a))
+
+# 두 개의 서로 다른 리스트를 사용하여 한 개의 사전을 생성
+a1 = ['name', 'age', 'phone', 'birth', 10]             # key
+a2 = ['김철수', 20, '010-1234-1234', '20021020', 500]    # Values
+
+a = {a1[0]:a2[0],a1[1]:a2[1]}
+print(a)                            # {'name': '김철수', 'age': 20}
+
+a = list(zip(a1,a2))
+print(a)        # [('name', '김철수'), ('age', 20), ('phone', '010-1234-1234'),
+                # ('birth', '20021020'), (10, 500)]
+
+print('{0:=^70}'.format('실습예제'))
+print('{0:=^70}'.format('Q.1'))
+srp = {'가위':'보','바위':'가위','보':'바위'}
+print(list(srp.keys()))
+print('{0:=^70}'.format('Q.2'))
+print(list(srp.values()))
+print('{0:=^70}'.format('Q.3'))
+print(list(srp.items()))
+print(srp.items(), type(srp.items()))
+print('{0:=^70}'.format('Q.4'))
+print(srp.get('가위'))
+print('{0:=^70}'.format('Q.5'))
+
+# [('가위', '보'), ('바위', '가위'), ('보', '바위')]
+z = [x for x, y in srp.items() if y == '바위']
+print(z)
+
+print('{0:=^70}'.format('Q.6'))
+# srp['찌'] = '빠'
+# srp['묵'] = '찌'
+# srp['빠'] = '묵'
+d = {'찌':'빠', '묵':'찌', '빠':'묵'}
+srp.update(d)
+print(srp)
+print(srp)
+print('{0:=^70}'.format('Q.7'))
+print('보자기' in srp)
+print('{0:=^70}'.format('Q.8'))
+z = { y:x for x, y in srp.items()}
+print(z)

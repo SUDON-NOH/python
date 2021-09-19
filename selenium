@@ -1,0 +1,13 @@
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+import datetime
+from selenium.webdriver.common.keys import Keys
+
+driver = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+driver.implicitly_wait(1)
+driver.get('https://pubmed.ncbi.nlm.nih.gov/?term=pd')
+driver.implicitly_wait(1)
+
+button = driver.find_element_by_xpath('//*[@id="search-results"]/section/div[2]/a')
+
+button.send_keys(Keys.ENTER)

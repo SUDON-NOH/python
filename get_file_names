@@ -1,0 +1,38 @@
+import os
+
+"""
+
+### Direction
+import File_reader as Fir
+
+add = "C:/------------------"
+y = Fir.File_rd()
+x = y.file(dirt = add)
+
+"""
+
+
+class File_rd:
+
+    def __init__(self):
+
+        # folder_list: to gather file names
+        self.file_list = []
+
+    # dirc: It is a directory to gather file names
+    def file(self, dirt):
+
+        self.file = dirt
+
+        # check the file or the folder
+        for i in os.listdir(dirt):
+
+            if os.path.isdir(dirt+i):
+                pass
+
+            # If it is a file, put it in the file list
+            elif os.path.isfile(dirt+i):
+                self.file_list.append(i)
+
+        # and return the file list
+        return self.file_list

@@ -1,0 +1,40 @@
+import os
+
+"""
+
+### Direction
+import Folder_reader as Fr
+
+add = "C:/------------------"
+y = Fr.Folder()
+x = y.folder(address=add)
+
+"""
+
+
+class Folder:
+
+    def __init__(self):
+
+        # folder_list: to gather folder names
+        self.folder_list = []
+
+    # address: It is a directory to gather folder names
+    def folder(self, address):
+
+        self.folder_dir = address
+
+        # check the file or the folder
+        for i in os.listdir(address):
+
+            if os.path.isfile(address+i):
+                pass
+
+            # If it is folder, put it in the folder list
+            elif os.path.isdir(address+i):
+                self.folder_list.append(i)
+
+        # and return the folder list
+        return self.folder_list
+        
+
